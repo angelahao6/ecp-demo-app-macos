@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright 2023 Google LLC.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,6 +37,18 @@ security default-keychain -s "${KEYCHAIN}"
 
 security import cred.p12 -P ${PASSWORD} -k ${KEYCHAIN} -A
 security unlock-keychain -p ${PASSWORD} ${KEYCHAIN}
+
+# Sign the test binary
+codesign -s - "${KEYCHAIN_TEST_BINARY}"
+# Grab CD Hash of the keychain test binary
+KEYCHAIN_TEST_BINARY_CD_HASH=$(codesign --display --verbose=4 "${KEYCHAIN_TEST_BINARY}" 2>&1 | grep 'CDHash=\(.*\)' | cut -d '=' -f 2)
+# Need to specify in ACL that the test binary can access the test toolchain
+# This is because the `-A` param to allow all applications access to the private key on the import
+# command is apparently not enough...
+#
+# This method was found by comparing the diff of `$ security dump-keychain -a` before and after always
+# allowing the test binary access
+security set-key-partition-list -S "cdhash:${KEYCHAIN_TEST_BINARY_CD_HASH}" -k ${PASSWORD} ${KEYCHAIN}
 
 popd
 

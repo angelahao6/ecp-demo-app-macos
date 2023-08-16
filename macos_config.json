@@ -1,0 +1,12 @@
+{
+  "cert_configs": {
+    "macos_keychain": {
+      "cert_issuer": "TestIssuer"
+    }
+  },
+  "libs": {
+    "ecp": "/Users/angelahao/Documents/ecp-demo-app-macos/bin/ecp",
+    "ecp_client": "/Users/angelahao/Documents/ecp-demo-app-macos/bin/libecp.dylib",
+    "tls_offload": "/Users/angelahao/Documents/ecp-demo-app-macos/libtls_offload.dylib"
+  }
+}
