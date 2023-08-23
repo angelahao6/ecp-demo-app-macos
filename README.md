@@ -4,9 +4,8 @@ This app demonstrates how to encrypt and decrypt messages using the Enterprise C
 # Usage
 To use the app, you need to specify the following flags:
 
-mode: The mode of operation, either -e for encryption or -d for decryption.
-
-msg: The message to encrypt or decrypt.
+- mode: The mode of operation, either -e for encryption or -d for decryption.
+- msg: The message to encrypt or decrypt.
 
 For example, to encrypt the message "Hello, world!", you would run the following command:
     $ go run main.go -mode -e -msg "Hello, world!"
