@@ -1,4 +1,4 @@
-# ecp-demo-app-macos
+# ECP Encryption/Decryption Demo App
 This app demonstrates how to encrypt and decrypt messages using the Enterprise Certificate Proxy (ECP) client library.
 
 # Usage
